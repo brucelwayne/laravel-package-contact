@@ -1,0 +1,39 @@
+{
+    "name": "brucelwayne/laravel-package-contact",
+    "description": "This is a Laravel-based package for collecting contacts, with support for multiple teams.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruce Wayne"
+        }
+    ],
+    "require": {
+        "veelasky/laravel-hashid": "^3.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Brucelwayne\\Contact\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Brucelwayne\\Contact\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brucelwayne\\Contact\\ContactServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    }
+}
