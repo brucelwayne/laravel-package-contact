@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('title');
             $table->text('content');
+            $table->string('token',21)->index();
             $table->timestamps();
         });
     }
