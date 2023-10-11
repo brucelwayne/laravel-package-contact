@@ -23,13 +23,11 @@ return new class extends Migration
              * @var Illuminate\Database\Schema\Blueprint|MongoDB\Laravel\Schema\Blueprint $table
              */
             $table->increments('id');
-            $table->integer('team_id')->index();
-            $table->string('name');
+            $table->integer('team_id')->default(0)->index();
             $table->string('email');
-            $table->string('phone');
-            $table->string('title');
-            $table->text('content');
-            $table->string('token',21)->index();
+            $table->string('subject');
+            $table->text('message');
+            $table->string('token',21)->unique();
             $table->timestamps();
         });
     }

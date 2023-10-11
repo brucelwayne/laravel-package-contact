@@ -7,13 +7,14 @@ use Veelasky\LaravelHashId\Eloquent\HashableId;
 
 /**
  * @property integer $team_id
- * @property string $name
  * @property string $email
- * @property string $phone
- * @property string $title
- * @property string $content
+ * @property string $subject
+ * @property string $message
  * @property Date $created_at
  * @property Date $updated_at
+ *
+ * @method static where(...$args)
+ * @method static self create($input)
  *
  */
 class ContactModel extends Model{
@@ -26,11 +27,10 @@ class ContactModel extends Model{
 
     protected $fillable = [
         'team_id',
-        'name',
         'email',
-        'phone',
-        'title',
-        'content',
+        'subject',
+        'message',
+        'token',
     ];
 
     protected $hidden = [
@@ -41,8 +41,16 @@ class ContactModel extends Model{
         'hash'
     ];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'hash';
+    }
+
+    public static function byToken(string $token){
+        return static::where('token',$token)->first();
+    }
+
+    public static function createNewContact($input){
+        return static::create($input);
     }
 }
