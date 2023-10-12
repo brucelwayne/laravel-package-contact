@@ -33,7 +33,7 @@ class ContactServiceProvider extends ServiceProvider
 
     protected function bootComponentNamespace(): void
     {
-        Blade::componentNamespace('Brucelwayne\\Blog\\View\\Components', $this->module_name);
+        Blade::componentNamespace('Brucelwayne\\Contact\\View\\Components', $this->module_name);
     }
 
     protected function bootConfigs(): void
