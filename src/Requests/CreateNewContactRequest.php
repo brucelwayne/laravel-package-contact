@@ -15,7 +15,8 @@ class CreateNewContactRequest extends FormRequest
             'email' => 'required|email|max:190',
             'subject' => 'required|max:190',
             'message' => 'required|max:2000',
-            'token' => ['required', 'max:21', new TokenExistsRule()]
+            'token' => ['required', 'max:21', new TokenExistsRule()],
+            'g-recaptcha-response' => 'recaptcha',
         ];
     }
 }
