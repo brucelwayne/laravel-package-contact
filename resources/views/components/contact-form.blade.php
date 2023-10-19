@@ -1,5 +1,5 @@
-<section class="my-20">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+<section class="my-10 lg:my-20">
+    <div class="flex flex-col items-center justify-center px-6 mx-auto">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-4xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6">
                 <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white heading">
