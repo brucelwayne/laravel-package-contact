@@ -5,7 +5,7 @@ use Brucelwayne\Contact\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::middleware(['web', 'localizationRedirect'])
+Route::middleware(['web', 'tenant:guest', 'localizationRedirect'])
     ->prefix(LaravelLocalization::setLocale())
     ->group(function () {
         //show contact us form
