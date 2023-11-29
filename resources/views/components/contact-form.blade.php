@@ -10,14 +10,13 @@
                     Have feedback or suggestions? Share your thoughts!
                 </p>
                 @if( Session::has( 'success' ))
-                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    <div class="p-4 mt-10 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                          role="alert">
                         {{ Session::get( 'success' ) }}
                     </div>
-
                 @endif
                 <form method="post" action="{{route('contact-us')}}" class="mt-10 space-y-8 border border-gray-100 shadow bg-gray-50 p-10 rounded-lg">
-                    @csrf
+
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Your email
@@ -76,6 +75,7 @@
                             class="w-full text-white px-4 py-3 bg-gray-900 hover:bg-gray-800 text-white capitalize font-semibold rounded">
                         Send message
                     </button>
+                    @csrf
                 </form>
             </div>
         </div>
