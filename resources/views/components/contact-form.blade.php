@@ -15,7 +15,7 @@
                         {{ Session::get( 'success' ) }}
                     </div>
                 @endif
-                <form method="post" action="{{route('contact-us')}}" class="mt-10 space-y-8 border border-gray-100 shadow bg-gray-50 p-10 rounded-lg">
+                <form method="post" action="{{route('contact-us')}}" class="mt-10 space-y-8 border border-gray-100 shadow bg-white p-10 rounded-lg">
 
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
