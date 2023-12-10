@@ -9,8 +9,8 @@ use Brucelwayne\Contact\Requests\CreateNewContactRequest;
 use Hidehalo\Nanoid\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\Mime\Part\Multipart\AlternativePart;
-use Symfony\Component\Mime\Part\TextPart;
+use Mallria\Core\Facades\Inertia;
+use Mallria\Core\Http\Responses\SuccessJsonResponse;
 
 class ContactUsController extends Controller
 {
@@ -28,16 +28,26 @@ class ContactUsController extends Controller
             Mail::to($forward_email)->send(new NewContactEmail($contact_model));
         }
 
-        session()->flash('success', 'Thank you for your message; we will get in touch with you as soon as possible.');
-
-        return redirect()->back();
+        if ($request->expectsJson()){
+            $client = new Client();
+            $token = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
+            return new SuccessJsonResponse([
+                'token' => $token,
+            ]);
+        }else{
+            session()->flash('success', 'Thank you for your message; we will get in touch with you as soon as possible.');
+            return redirect()->back();
+        }
     }
 
     protected function renderWithToken()
     {
         $client = new Client();
         $token = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
-        return view('contact::contact.index', [
+//        return view('contact::contact.index', [
+//            'token' => $token,
+//        ]);
+        return Inertia::render('Contact/Index',[
             'token' => $token,
         ]);
     }
