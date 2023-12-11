@@ -3,6 +3,7 @@
 namespace Brucelwayne\Contact\Controllers;
 
 use App\Http\Controllers\Controller;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Brucelwayne\Contact\Mail\NewContactEmail;
 use Brucelwayne\Contact\Models\ContactModel;
 use Brucelwayne\Contact\Requests\CreateNewContactRequest;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Mallria\Core\Facades\Inertia;
 use Mallria\Core\Http\Responses\SuccessJsonResponse;
+use Mallria\Core\Models\PageModel;
 
 class ContactUsController extends Controller
 {
@@ -42,12 +44,17 @@ class ContactUsController extends Controller
 
     protected function renderWithToken()
     {
+        $page_model = PageModel::byRoute('contact-us');
+        SEOMeta::setTitle($page_model->title);
+        SEOMeta::setDescription($page_model->description);
+
         $client = new Client();
         $token = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
 //        return view('contact::contact.index', [
 //            'token' => $token,
 //        ]);
         return Inertia::render('Contact/Index',[
+            'page' => $page_model,
             'token' => $token,
         ]);
     }
