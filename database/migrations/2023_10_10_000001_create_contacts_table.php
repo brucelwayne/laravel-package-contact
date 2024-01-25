@@ -8,12 +8,12 @@ return new class extends Migration
 
     protected $connection = 'mysql';
 
-    protected string $table = 'contacts';
+    protected string $table = 'blw_contacts';
 
     public function __construct()
     {
         $this->connection = config('brucelwayne-contact.database','mysql');
-        $this->table = config('brucelwayne-contact.table','contacts');
+        $this->table = config('brucelwayne-contact.table','blw_contacts');
     }
 
     public function up(): void

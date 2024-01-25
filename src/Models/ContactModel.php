@@ -21,7 +21,7 @@ class ContactModel extends Model{
 
     use HashableId;
 
-    protected $table = 'contacts';
+    protected $table = 'blw_contacts';
 
     protected $hashKey = ContactModel::class;
 
