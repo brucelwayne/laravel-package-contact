@@ -1,4 +1,5 @@
 <?php
+
 namespace Brucelwayne\Contact\Models;
 
 use Carbon\Traits\Date;
@@ -17,13 +18,14 @@ use Veelasky\LaravelHashId\Eloquent\HashableId;
  * @method static self create($input)
  *
  */
-class ContactModel extends Model{
+class ContactModel extends Model
+{
 
     use HashableId;
 
     protected $table = 'blw_contacts';
 
-    protected $hashKey = ContactModel::class;
+    protected $hashKey = 'blw_contacts';
 
     protected $fillable = [
         'team_id',
@@ -41,16 +43,18 @@ class ContactModel extends Model{
         'hash'
     ];
 
+    public static function byToken(string $token)
+    {
+        return static::where('token', $token)->first();
+    }
+
+    public static function createNewContact($input)
+    {
+        return static::create($input);
+    }
+
     public function getRouteKeyName(): string
     {
         return 'hash';
-    }
-
-    public static function byToken(string $token){
-        return static::where('token',$token)->first();
-    }
-
-    public static function createNewContact($input){
-        return static::create($input);
     }
 }
