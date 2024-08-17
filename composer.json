@@ -11,7 +11,8 @@
     "require": {
         "biscolab/laravel-recaptcha": "^v6.0",
         "veelasky/laravel-hashid": "^3.1",
-        "hidehalo/nanoid-php": "^1.1"
+        "hidehalo/nanoid-php": "^1.1",
+        "mews/captcha": "^3.3"
     },
     "require-dev": {
     },

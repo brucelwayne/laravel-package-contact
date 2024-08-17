@@ -4,22 +4,17 @@ namespace Brucelwayne\Contact\Rules;
 
 use Brick\PhoneNumber\PhoneNumber as BrickPhoneNumber;
 use Brick\PhoneNumber\PhoneNumberParseException;
-use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class PhoneNumberRule implements ValidationRule
+class PhoneNumberRule implements Rule
 {
-    public function validate(string $attribute, mixed $value, Closure $fail): void
-    {
-        if (!$this->passes($attribute, $value)) {
-            $fail($this->message());
-        }
-    }
-
     public function passes($attribute, $value): bool
     {
         try {
-            BrickPhoneNumber::parse($value);
+            $phone = BrickPhoneNumber::parse($value);
+            if (!$phone->isValidNumber()) {
+                return false;
+            }
             return true;
         } catch (PhoneNumberParseException $e) {
             return false;
