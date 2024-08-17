@@ -9,6 +9,7 @@ use Veelasky\LaravelHashId\Eloquent\HashableId;
 /**
  * @property integer $team_id
  * @property string $email
+ * @property string $phone
  * @property string $subject
  * @property string $message
  * @property Date $created_at
@@ -29,7 +30,9 @@ class ContactModel extends Model
 
     protected $fillable = [
         'team_id',
+        'type',
         'email',
+        'phone',
         'subject',
         'message',
         'token',
