@@ -2,6 +2,7 @@
 
 namespace Brucelwayne\Contact;
 
+use Brucelwayne\Contact\Components\ContactForm;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,16 +27,6 @@ class ContactServiceProvider extends ServiceProvider
 
     }
 
-    protected function loadBladeViews(): void
-    {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->module_name);
-    }
-
-    protected function bootComponentNamespace(): void
-    {
-        Blade::componentNamespace('Brucelwayne\\Contact\\View\\Components', $this->module_name);
-    }
-
     protected function bootConfigs(): void
     {
         $this->mergeConfigFrom(
@@ -51,6 +42,17 @@ class ContactServiceProvider extends ServiceProvider
     protected function bootMigrations(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    protected function bootComponentNamespace(): void
+    {
+        Blade::componentNamespace('Brucelwayne\\Contact\\View\\Components', $this->module_name);
+        Blade::component('contact-form', ContactForm::class);
+    }
+
+    protected function loadBladeViews(): void
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->module_name);
     }
 
 }
