@@ -1,42 +1,42 @@
 {
-    "name": "brucelwayne/laravel-package-contact",
-    "description": "This is a Laravel-based package for collecting contacts, with support for multiple teams.",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Bruce Wayne"
-        }
-    ],
-    "require": {
-        "biscolab/laravel-recaptcha": "^v6.0",
-        "veelasky/laravel-hashid": "^3.1",
-        "hidehalo/nanoid-php": "^1.1",
-        "mews/captcha": "^3.3"
-    },
-    "require-dev": {
-    },
-    "autoload": {
-        "psr-4": {
-            "Brucelwayne\\Contact\\": "src"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Brucelwayne\\Contact\\Tests\\": "tests"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Brucelwayne\\Contact\\ContactServiceProvider"
-            ],
-            "aliases": {
-
-            }
-        }
+  "name": "brucelwayne/laravel-package-contact",
+  "description": "This is a Laravel-based package for collecting contacts, with support for multiple teams.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bruce Wayne"
     }
+  ],
+  "require": {
+    "biscolab/laravel-recaptcha": "^v6.0",
+    "veelasky/laravel-hashid": "^3.1",
+    "hidehalo/nanoid-php": "^1.1",
+    "mews/captcha": "^3.3"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Brucelwayne\\Contact\\": "src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Brucelwayne\\Contact\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Brucelwayne\\Contact\\ContactServiceProvider",
+        "Brucelwayne\\Contact\\EventServiceProvider"
+      ],
+      "aliases": {
+      }
+    }
+  }
 }
