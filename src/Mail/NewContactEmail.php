@@ -5,8 +5,6 @@ namespace Brucelwayne\Contact\Mail;
 use Brucelwayne\Contact\Models\ContactModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class NewContactEmail extends Mailable
@@ -15,24 +13,18 @@ class NewContactEmail extends Mailable
 
     private ContactModel $contact;
 
-    function __construct(ContactModel $contact)
+    public function __construct(ContactModel $contact)
     {
         $this->contact = $contact;
     }
 
-    public function envelope()
+    public function build()
     {
-        return new Envelope(
-            subject: 'Contact info from '.config('app.name'),
-        );
+        return $this
+            ->subject('New Contact from ' . config('app.name'))
+            ->view('emails.contact.contact')
+            ->with([
+                'contact' => $this->contact,
+            ]);
     }
-
-    public function content()
-    {
-        return new Content(
-            view: 'contact::mail.new-contact',
-            with: ['contact' => $this->contact],
-        );
-    }
-
 }

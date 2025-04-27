@@ -43,8 +43,14 @@ class ContactUsController extends Controller
         $contact_model = ContactModel::createNewContact($request->input());
 
         $forward_email = config('contact.forward_email');
-        if (!empty($forward_email)) {
-            Mail::to($forward_email)->send(new NewContactEmail($contact_model));
+
+        $emails = array_filter(array_map('trim', explode(',', $forward_email)));
+
+        if (!empty($emails)) {
+            foreach ($emails as $email) {
+                Mail::to($email)
+                    ->send(new NewContactEmail($contact_model));
+            }
         }
 
         if ($request->expectsJson()) {
