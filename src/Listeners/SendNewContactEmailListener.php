@@ -3,12 +3,12 @@
 namespace Brucelwayne\Contact\Listeners;
 
 use Brucelwayne\Contact\Events\NewContactEvent;
-use Brucelwayne\Contact\Jobs\SendContactEmailJob;
+use Brucelwayne\Contact\Jobs\SendContactForwardEmailJob;
 
 class SendNewContactEmailListener
 {
     public function handle(NewContactEvent $event)
     {
-        SendContactEmailJob::dispatch($event->contactModel);
+        SendContactForwardEmailJob::dispatch($event->contactModel);
     }
 }

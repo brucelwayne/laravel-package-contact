@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendContactEmailJob implements ShouldQueue
+class SendContactForwardEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -33,14 +33,8 @@ class SendContactEmailJob implements ShouldQueue
     {
         $forwardEmails = config('contact.forward_email');
 
-        if (empty($forwardEmails)) {
-            return;
-        }
-
-        $emails = array_filter(array_map('trim', explode(',', $forwardEmails)));
-
-        if (!empty($emails)) {
-            foreach ($emails as $email) {
+        if (!empty($forwardEmails)) {
+            foreach ($forwardEmails as $email) {
                 Mail::to($email)
                     ->send(new NewContactEmail($this->contactModel));
             }

@@ -22,7 +22,7 @@ class NewContactEmail extends Mailable
     {
         return $this
             ->subject('New Contact from ' . config('app.name'))
-            ->view('emails.contact.contact')
+            ->view('emails.contact.forward')
             ->with([
                 'contact' => $this->contact,
             ]);
