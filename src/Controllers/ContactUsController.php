@@ -3,17 +3,20 @@
 namespace Brucelwayne\Contact\Controllers;
 
 use App\Http\Controllers\Controller;
+use Brucelwayne\Admin\Traits\HasMultipleEmailToSend;
 use Brucelwayne\Contact\Mail\NewContactEmail;
 use Brucelwayne\Contact\Models\ContactModel;
 use Brucelwayne\Contact\Requests\CreateNewContactRequest;
 use Hidehalo\Nanoid\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Mallria\Core\Facades\Inertia;
 use Mallria\Core\Http\Responses\SuccessJsonResponse;
 
 class ContactUsController extends Controller
 {
+
+    use HasMultipleEmailToSend;
+
     function index(Request $request)
     {
         return $this->renderWithToken();
@@ -43,15 +46,7 @@ class ContactUsController extends Controller
         $contact_model = ContactModel::createNewContact($request->input());
 
         $forward_email = config('contact.forward_email');
-
-        $emails = array_filter(array_map('trim', explode(',', $forward_email)));
-
-        if (!empty($emails)) {
-            foreach ($emails as $email) {
-                Mail::to($email)
-                    ->send(new NewContactEmail($contact_model));
-            }
-        }
+        $this->sendToMultipleEmails(new NewContactEmail($contact_model), $forward_email);
 
         if ($request->expectsJson()) {
             $client = new Client();

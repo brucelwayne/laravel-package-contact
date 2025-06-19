@@ -2,6 +2,7 @@
 
 namespace Brucelwayne\Contact\Jobs;
 
+use Brucelwayne\Admin\Traits\HasMultipleEmailToSend;
 use Brucelwayne\Contact\Mail\NewContactEmail;
 use Brucelwayne\Contact\Models\ContactModel;
 use Illuminate\Bus\Queueable;
@@ -9,11 +10,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
 
 class SendContactForwardEmailJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, HasMultipleEmailToSend;
 
     protected $contactModel;
 
@@ -32,12 +32,6 @@ class SendContactForwardEmailJob implements ShouldQueue
     public function handle()
     {
         $forwardEmails = config('contact.forward_email');
-
-        if (!empty($forwardEmails)) {
-            foreach ($forwardEmails as $email) {
-                Mail::to($email)
-                    ->send(new NewContactEmail($this->contactModel));
-            }
-        }
+        $this->sendToMultipleEmails(new NewContactEmail($this->contactModel), $forwardEmails);
     }
 }
