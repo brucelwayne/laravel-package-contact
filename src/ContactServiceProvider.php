@@ -36,7 +36,7 @@ class ContactServiceProvider extends ServiceProvider
 
     protected function bootRoutes(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+//        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 
     protected function bootMigrations(): void
